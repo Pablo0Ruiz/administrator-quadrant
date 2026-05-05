@@ -1,27 +1,16 @@
+import 'dotenv/config'
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import { HealthSchema } from '@repo/types'
+import { cors } from 'hono/cors'
+import routes from './routes/index.js'
 
 const app = new Hono()
 
+app.use(cors({ origin: '*' }))
+app.route('/api',routes)
+
 app.get('/', (c) => {
   return c.text('Hello Hono!')
-})
-
-app.get('/health', (c) => {
-  const health = {
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-  }
-  
-  const result = HealthSchema.safeParse(health)
-  
-  if (!result.success) {
-    return c.json({ error: 'Internal Server Error' }, 500)
-  }
-
-  return c.json(result.data)
 })
 
 const port = 3000
