@@ -9,9 +9,16 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@ai-sdk/groq": "^3.0.38",
     "@hono/node-server": "^1.19.14",
+    "@pinecone-database/pinecone": "^7.2.0",
+    "@repo/types": "workspace:*",
+    "@types/pdf-parse": "^1.1.5",
+    "ai": "^6.0.175",
+    "dotenv": "^17.4.2",
     "hono": "^4.12.16",
-    "@repo/types": "workspace:*"
+    "pdf-parse": "^2.4.5",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

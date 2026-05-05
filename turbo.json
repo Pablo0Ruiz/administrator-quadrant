@@ -5,7 +5,8 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**"],
+      "env": ["GROQ_API_KEY", "PINECONE_API_KEY", "ADMIN_API_KEY"]
     },
     "lint": {
       "dependsOn": ["^lint"]
