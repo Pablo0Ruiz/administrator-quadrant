@@ -1,111 +1,238 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import "tailwindcss";
+@source "../../../packages/ui/src/**/*.{ts,tsx}";
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+@theme {
+  /* ── Color Palette ── */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-400: #94a3b8;
+  --color-slate-600: #475569;
+  --color-slate-900: #0f172a;
+  
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* ── Semantic Tokens ── */
+  --color-background: #ffffff;
+  --color-sidebar: rgba(248, 250, 252, 0.8);
+  --color-surface: var(--color-slate-50);
+  --color-border: var(--color-slate-200);
+  
+  --color-text-primary: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-600);
+  
+  --color-accent: var(--color-blue-600);
+  --color-accent-hover: var(--color-blue-700);
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
+  /* ── Diff / Highlight ── */
+  --color-diff-bg: rgba(37, 99, 235, 0.08);
+  --color-diff-text: var(--color-blue-600);
+  --color-diff-border: var(--color-blue-700);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+  /* ── Typography ── */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Outfit', var(--font-sans);
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  /* ── Effects ── */
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --shadow-glass: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --backdrop-blur-sidebar: blur(16px);
 }
 
 body {
   margin: 0;
+  background-color: var(--color-background);
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+/* ─────────────────────────────────────────────────────── */
+/* Cuadrante de Servicios — Scoped Excel-style tokens      */
+/* Estos tokens NO afectan el design system general        */
+/* ─────────────────────────────────────────────────────── */
+
+.cuadrante-root {
+  --cq-border:        #4472C4;
+  --cq-border-thick:  #2255A0;
+  --cq-weekend:       #FFA564;
+  --cq-weekend-header:#FF8C42;
+  --cq-service-text:  #C00000;
+  --cq-header-bg:     #D9E1F2;
+  --cq-subheader-bg:  #E8EEFA;
+  --cq-row-even:      #FFFFFF;
+  --cq-row-odd:       #F5F5F5;
+  --cq-highlight-bg:  rgba(255, 220, 0, 0.35);
+  --cq-highlight-border: #FFC000;
+  --cq-font:          11px/1.3 'Arial', sans-serif;
+  --cq-cell-px:       3px;
+  --cq-cell-py:       2px;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* Reset de tabla */
+.cuadrante-root table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font: var(--cq-font);
+  width: max-content;
+  min-width: 100%;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* Celdas base */
+.cuadrante-root th,
+.cuadrante-root td {
+  border: 1px solid var(--cq-border);
+  padding: var(--cq-cell-py) var(--cq-cell-px);
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
 }
+
+/* Headers */
+.cuadrante-root th {
+  background-color: var(--cq-header-bg);
+  font-weight: bold;
+  font-size: 10px;
+}
+
+/* Columna sticky izquierda */
+.cuadrante-col-sticky {
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  background-color: var(--cq-row-even);
+  text-align: left !important;
+  min-width: 120px;
+  max-width: 180px;
+  white-space: normal;
+  border-right: 2px solid var(--cq-border-thick) !important;
+}
+
+th.cuadrante-col-sticky {
+  background-color: var(--cq-header-bg);
+  z-index: 20;
+}
+
+/* Filas de header sticky */
+.cuadrante-header-row th {
+  position: sticky;
+  z-index: 15;
+}
+
+.cuadrante-header-row:nth-child(1) th {
+  top: 0;
+}
+
+.cuadrante-header-row:nth-child(2) th {
+  top: 27px; /* altura aprox de la primera fila de header */
+}
+
+/* Segunda fila de header: sticky col también necesita z-index mayor */
+.cuadrante-header-row:nth-child(2) th.cuadrante-col-sticky {
+  top: 27px;
+  z-index: 25;
+}
+
+/* Columnas de fin de semana */
+.cuadrante-weekend-col {
+  background-color: var(--cq-weekend) !important;
+}
+
+th.cuadrante-weekend-col {
+  background-color: var(--cq-weekend-header) !important;
+}
+
+/* Nombre del servicio (rojo, bold) */
+.cuadrante-service-name {
+  color: var(--cq-service-text);
+  font-weight: bold;
+  font-size: 11px;
+  text-align: left;
+  padding: 3px 4px;
+}
+
+/* Nombre del empleado */
+.cuadrante-employee-name {
+  font-weight: bold;
+  text-align: left;
+  padding: 2px 4px;
+}
+
+/* Teléfono */
+.cuadrante-phone {
+  text-align: left;
+  color: #444;
+  padding: 2px 4px;
+}
+
+/* Celda con múltiples valores */
+.cuadrante-multi-value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  line-height: 1.2;
+}
+
+/* Celda modificada (highlight IA) */
+.cuadrante-modified {
+  background-color: var(--cq-highlight-bg) !important;
+  outline: 1px solid var(--cq-highlight-border);
+  outline-offset: -1px;
+  position: relative;
+}
+
+/* Punto de indicador en celdas modificadas */
+.cuadrante-modified::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--cq-highlight-border);
+}
+
+/* Total de horas */
+.cuadrante-horas {
+  font-weight: bold;
+  color: #1a1a1a;
+  border-left: 2px solid var(--cq-border-thick) !important;
+}
+
+/* Título del cuadrante */
+.cuadrante-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline;
+  font-family: 'Arial', sans-serif;
+  padding: 8px 0 4px;
+  letter-spacing: 0.5px;
+}
+
+.cuadrante-meta {
+  font-size: 11px;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 8px;
+}
+
+/* Scroll container */
+.cuadrante-scroll-container {
+  overflow: auto;
+  height: 100%;
+  background: white;
+}
+
