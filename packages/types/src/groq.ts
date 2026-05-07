@@ -1,6 +1,32 @@
 import { z } from "zod";
 
-export type ExcelRow = Record<string, any>;
+export type ExcelRow = Record<string, any> & {
+    _meta?: {
+        modifiedFields: string[];
+    };
+};
+
+export type CuadranteCellValue = string | number | string[] | null;
+export interface CuadranteMetadata {
+    title: string;
+    mes: string;
+    anio: number;
+    servicio: string;
+    responsable?: string;
+    diasEnMes: number;
+    primerDiaSemana: string;
+}
+
+export interface CuadranteEntry {
+    servicio: string;
+    empleado: string;
+    telefono: string;
+    dias: Record<number, CuadranteCellValue>;
+    horas: number | null;
+    _meta?: {
+        modifiedDays: string[];
+    };
+}
 
 export const ChatRequestSchema = z.object({
     promptMessage: z.string().min(1, "El mensaje es obligatorio"),
